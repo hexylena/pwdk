@@ -1,59 +1,10 @@
-ptdk: Web server to create tutorial skeleton from workflow
-==========================================================
+# pwdk: Web server to create workflow tests
 
-It uses Planemo to create the skeleton of a tutorial  for Galaxy Training Material from a public workflow on a public Galaxy instance.
+It uses Planemo to create the workflow test of a workflow invocation
 
-# Usage
+# ptdk? pwdk?
 
-## Requirement
-
-- virtualenv
-
-## Prepare the environment
-
-- Create virtual environment:
-
-    ```
-    $ make create-venv
-    ```
-
-## Run the server
-
-- Export the API for usegalaxy.eu, usegalaxy.org.au and usegalaxy.org.au as environment variables:
-
-    ```
-    $ export USEGALAXY_EU_APIKEY=<replace with correct API key>
-    $ export USEGALAXY_FR_APIKEY=<replace with correct API key>
-    $ export USEGALAXY_ORG_AU_APIKEY=<replace with correct API key>
-    $ export USEGALAXY_ORG_APIKEY=<replace with correct API key>
-    ```
-
-- Launch the server:
-
-    ```
-    $ make run
-    ```
-
-- Browse it at [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
-- Kill it with CTRL+C
-
-## Run the tests
-
-- Install the requirements:
-
-    ```
-    $ make setup
-    ```
-
-- Run the tests:
-
-    ```
-    $ make test
-    ```
-
-## Deploy to Heroku (https://ptdk.herokuapp.com/)
-
-Automatically done when push to main
+it's ptdk with a tiny change.
 
 # How is it working?
 

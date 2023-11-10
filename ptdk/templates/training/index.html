@@ -1,33 +1,16 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Generate skeleton for a new Galaxy tutorial{% endblock %}</h1>
+    <h1>{% block title %}Generate workflow tests for your tutorial{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-    <p>Using a workflow, you can generate the skeleton of a new tutorial. 
-        All steps of the workflow will be listed with the tool and its parameters. 
-        If a Zenodo URL is provided, the links to the data there will be added to the tutorial.
+    <p>Using a <b>workflow invocation</b>, you can generate the skeleton of the tests
     </p>
     {% if not zip_fp %}
     <form method="post">
         <div class="field">
-            <label for="name" class="label">Folder name</label>
-            <div class="control">
-                <input name="name" class="input" type="text" placeholder="tutorial" required>
-                <p class="help">The name will be the name of the folder of the tutorial</p>
-            </div>
-        </div>
-
-        <div class="field">
-            <label for="title" class="label">Tutorial title</label>
-            <div class="control">
-                <input name="title" class="input" type="text" placeholder="The best tutorial - Optional">
-            </div>
-        </div>
-
-        <div class="field">
-            <label for="galaxy_url" class="label">Galaxy instance with the public workflow</label>
+            <label for="galaxy_url" class="label">Galaxy instance where you invoked the workflow</label>
             <div class="control">
                 <div class="select">
                     <select name="galaxy_url">
@@ -40,17 +23,18 @@
         </div>
 
         <div class="field">
-            <label for="workflow_id" class="label">ID of the workflow</label>
+            <label for="workflow_id" class="label">ID of the invocation</label>
             <div class="control">
                 <input name="workflow_id" class="input" type="text" placeholder="" required>
-                <p class="help">The workflow should be public on the Galaxy instance. The id can be found on URL of the workflow when running it.</p>
+                <p class="help">This can be found on the workflow invocations list (User → Workflow Invocations) when you expand an individual workflow invocation.</p>
             </div>
         </div>
 
         <div class="field">
-            <label for="zenodo" class="label">Zenodo URL with the input data</label>
+            <label for="api_key" class="label">Your personal API key</label>
             <div class="control">
-                <input name="zenodo" class="input" type="text" placeholder="Optional">
+                <input name="api_key" class="input" type="text" placeholder="" required>
+                <p class="help">We need your key, as invocations are not public or shareable, only the outputs of an invocation. Thus, the action needs to be executed on your behalf. We will not store your API key.</p>
             </div>
         </div>
 
@@ -64,61 +48,21 @@
 
     {% if zip_fp %}
     <h1>🤩
-        The skeleton of the tutorial has been generated.
+        The workflow test has been generated
     </h1>
 
     <p>You can now add it to the <a href="https://training.galaxyproject.org/">Galaxy Training Material</a>!</p>
 
-    <ul>
-        <li>
-            <a class="button is-primary" href="{{ zip_fp }}"><i class="fas fa-file-archive"></i>Download the  generated archive with the tutorial skeleton</a>
-            including:
-            <ul>
-                <li>tutorial content, <code>tutorial.md</code> file, filled with all steps from the workflow and their parameters</li>
-                <li>its workflow (<code>workflow</code> folder)</li>
-                <li>a <code>data_library.yaml</code> file if Zenodo link was provided</li>
-            </ul>
-        <li>Create a <a href="https://github.com/">GitHub account</a></li>
-    </ul>
 
-    <p>To add the new tutorial to the <a href="https://github.com/galaxyproject/training-material">GitHub repository</a> of the Galaxy Training Material,
-    2 ways are possible now:</p>
+    <p>
+    <a class="button is-primary" href="{{ zip_fp }}"><i class="fas fa-file-archive"></i>Download the  generated archive with the tutorial skeleton</a>
+    </p>
 
-    <ul>
-        <li>Using the GitHub interface only
-            <ul>
-                <li>Unzip the downloaded archive</li>
-                <li>Go to the <a href="https://github.com/galaxyproject/training-material">GitHub repository</a> of the Training Material</li>
-                <li>Fork the GitHub repository</li>
-                <li>Click on <code>topics</code></li>
-                <li>Select the topic for the new tutorial</li>
-                <li>Go to <code>tutorials</code></li>
-                <li>Click on <strong>Create new file</strong></li>
-                <li>Type <code>name/tutorial.md</code>, replacing "name" by the name of your tutorial (not the title)</li>
-                <li>Copy the content of downloaded <code>tutorial.md</code> file there</li>
-                <li>Edit the file and fill the content (check our <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">tutorial on how to write tutorials</a>)</li>
-                <li>Fill the <strong>Commit new file</strong> form</li>
-                <li>Create a new branch using the name of the tutorial</li>
-                <li>Click on <strong>Propose new file</strong></li>
-                <li>Open a Pull Request, as explained in our <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html#open-a-pull-request">tutorial</a></li>
-                <li>Add the workflow file (in <code>workflow</code> folder) by updating the Pull Request, as explained in our <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html#update-a-pull-request">tutorial</a></li>
-            </ul>
-        </li>
-        
-        <li>Using the command-line (check out our <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">tutorial on how to contribute to GitHub</a>)
-            <ul>
-                <li>Clone the <a href="https://github.com/galaxyproject/training-material">GitHub repository</a> of the Training Material locally</li>
-                <li>Move the Training Material folder</li>
-                <li>Unzip the downloaded archive in the <code>tutorials</code> folder of the topic for the new tutorial</li>
-                <li>Edit the <code>tutorial.md</code> file and fill the content (check our <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">tutorial on how to write tutorials</a>)</li>
-            </ul>
-        </li>
-    </ul>
+    <p>
+    Please add these files to the <code>workflows/</code> directory of your tutorial that you're contributing to the GTN.
+    </p>
 
-    <p>In both cases, you should change the contributors listed in the metadata of the new tutorial (using their GitHub id) and add the missing one to <code>CONTRIBUTORS.yaml</code> file.</p>
-
-    <p>Several <a href="https://training.galaxyproject.org/training-material/topics/contributing/">other tutorials</a> explain the process to create training material.</p>
-    <a class="button is-success" href="/">Generate a new tutorial</a>
+    <a class="button is-success" href="/">Export a new invocation</a>
     {% endif %}
 
 {% endblock %}

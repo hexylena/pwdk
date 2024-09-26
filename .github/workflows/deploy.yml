@@ -29,5 +29,5 @@ jobs:
 
       - name: Deploy 🚀
         run: |
-            git remote add dokku dokku@apps.galaxyproject.eu:ptdk
+            git remote add dokku dokku@apps.galaxyproject.eu:pwdk
             git push dokku main

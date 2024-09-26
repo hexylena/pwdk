@@ -45,8 +45,6 @@ def check_metadata(tuto):
         error = "Galaxy URL is required."
     elif not tuto["invocation_id"]:
         error = "Workflow id is required."
-    elif not tuto["api_key"]:
-        error = "API Key is required."
     elif tuto["galaxy_url"] not in config:
         error = "Unsupported Galaxy instance."
     return error
@@ -60,7 +58,7 @@ def generate(tuto):
             'workflow_test_init',
             '--from_invocation', tuto['invocation_id'],
             '--galaxy_url', tuto['galaxy_url'],
-            '--galaxy_user_key', tuto['api_key'],
+            '--galaxy_user_key', "",
         ])
         print(out)
     except:
@@ -77,7 +75,7 @@ def index():
             "uuid": str(uuid.uuid4())[:8],
             "galaxy_url": request.form["galaxy_url"],
             "invocation_id": request.form["workflow_id"],
-            "api_key": request.form["api_key"],
+            "api_key": "",
         }
         print(tuto_metadata)
         error = check_metadata(tuto_metadata)

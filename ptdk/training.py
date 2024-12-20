@@ -23,18 +23,15 @@ class PtdkException(Exception):
 tuto = Blueprint("training", __name__)
 
 config = {
-    # "usegalaxy.eu": {
-    #     "url": "https://usegalaxy.eu/",
-    # },
-    # "usegalaxy.org.au": {
-    #     "url": "https://usegalaxy.org.au/",
-    # },
+    "usegalaxy.eu": {
+        "url": "https://usegalaxy.eu/",
+    },
+    "usegalaxy.org.au": {
+        "url": "https://usegalaxy.org.au/",
+    },
     "usegalaxy.org": {
         "url": "https://usegalaxy.org/",
     },
-    # "usegalaxy.fr": {
-    #     "url": "https://usegalaxy.fr/",
-    # },
 }
 
 
